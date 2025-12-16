@@ -9,3 +9,6 @@ class Post(models.Model):
     content = models.TextField() # Content of the blog post
     created_on = models.DateTimeField(auto_now_add=True)  # Timestamp when the post is created  
     status=models.IntegerField(choices=STATUS, default=0) # Status field to indicate draft or published
+    
+def __str__(self):
+        return self.title
