@@ -5,17 +5,22 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class Post(models.Model):
-    # Title should be unique
     title = models.CharField(max_length=200, unique=True)
-    # Slug should be unique
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='blog_posts')  # Link to User model
-    content = models.TextField()  # Content of the blog post
-    # Timestamp when the post is created
+        User, on_delete=models.CASCADE, related_name="blog_posts"
+    )
+    content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    # Status field to indicate draft or published
     status = models.IntegerField(choices=STATUS, default=0)
+    excerpt = models.TextField(blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return f"{self.title} | written by {self.author}"
 
 
 class User(models.Model):
@@ -24,17 +29,25 @@ class User(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="posts")
-
+   
 
 class Comment(models.Model):
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="comments")
+        Post,
+        on_delete=models.CASCADE,
+        related_name="comments"
+    )
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commenter")
+        User,
+        on_delete=models.CASCADE,
+        related_name="comments_author"
+    )
     body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["created_on"]
 
-def __str__(self):
-    return f"Post for {self.title}"
+    def __str__(self):
+        return f"Comment {self.body} by {self.author}"
