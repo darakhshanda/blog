@@ -6,7 +6,5 @@ from .models import Post
 
 
 class PostList(generic.ListView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "mainblog/post_list.html"
-    context_object_name = "object_list"
-    paginate_by = 20
