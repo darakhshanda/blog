@@ -23,14 +23,6 @@ class Post(models.Model):
         return f"{self.title} | written by {self.author}"
 
 
-class User(models.Model):
-    post_author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="user")
-    date_created = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="posts")
-   
-
 class Comment(models.Model):
     post = models.ForeignKey(
         Post,
