@@ -6,7 +6,9 @@ from .models import Post
 
 
 class PostList(generic.ListView):
+    # published posts only with filtering and ordering
     queryset = Post.objects.filter(status=1).order_by("-created_on")
+    # default: <app_label>/<model_name>_list.html
     template_name = "mainblog/post_list.html"
 
 
