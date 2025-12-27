@@ -9,8 +9,10 @@ class PostList(generic.ListView):
     # published posts only with filtering and ordering
     queryset = Post.objects.filter(status=1).order_by("-created_on")
     # default: <app_label>/<model_name>_list.html
-    template_name = "mainblog/post_list.html"
+    template_name = "mainblog/index.html"
+    paginate_by = 6
 
 
-class Main(generic.TemplateView):
-    template_name = "mainblog/main.html"
+# class Main(generic.TemplateView):
+#     template_name = "mainblog/index.html"
+#     paginate_by = 6
