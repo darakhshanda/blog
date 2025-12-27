@@ -7,15 +7,16 @@ from django.shortcuts import render, get_object_or_404
 
 class PostList(generic.ListView):
     # published posts only with filtering and ordering
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    queryset = Post.objects.order_by("-created_on")  # filter(status=1)
     # default: <app_label>/<model_name>_list.html
     template_name = "mainblog/index.html"
     paginate_by = 6
 
 
-# class Main(generic.TemplateView):
+# class post_detail(generic.TemplateView):
 #     template_name = "mainblog/index.html"
 #     paginate_by = 6
+
 def post_detail(request, slug):
     """
     Display an individual :model:`blog.Post`.
@@ -30,11 +31,7 @@ def post_detail(request, slug):
     :template:`mainblog/post_detail.html`
     """
 
-    queryset = Post.objects.filter(status=1)
+    queryset = Post.objects.order_by("-created_on")  # filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
 
-    return render(
-        request,
-        "mainblog/post_detail.html",
-        {"post": post},
-    )
+    return render(request, "mainblog/post_detail.html", {"post": post},)
