@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
-    "https://*.herokuapp.com",
+    "https://*.herokuapp.com"
 ]
 # Application definition
 
@@ -70,7 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django-allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
