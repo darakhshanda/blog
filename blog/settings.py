@@ -48,10 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'django_summernote',
+    'bootstrap5',
     'mainblog',
     'about',
 ]
@@ -69,7 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    'django-allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
