@@ -1,10 +1,20 @@
 from django.shortcuts import render
+from django.contrib import messages
 from .models import About
 from .forms import CollaborateForm
-from django.contrib import messages
 
 
 def about_me(request):
+    """  
+        View to render the about me page.
+    **Context**
+    ``About`` model is designed to store and manage information about an individual or entity.
+    It includes fields for the title, content, profile image, and the last updated timestamp.
+    ``collaborate_form`` 
+        An instance of :form:`CollaborateForm` is used to handle collaboration requests from users.
+    **Template:**
+    :template:`about/about.html`
+    """
     about = About.objects.all().order_by('-updated_on').first()
 
     if request.method == "POST":
