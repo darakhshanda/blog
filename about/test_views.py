@@ -25,3 +25,18 @@ class TestAboutViews(TestCase):
         self.assertIsInstance(
             # checks that the correct about instance is being used in the context.
             response.context['collaborate_form'], CollaborateForm)
+
+    def test_successful_collaboration_request_submission(self):
+        """Test for a user requesting a collaboration"""
+        form_data = {
+            'name': 'Test User',
+            'email': 'test@email.com',
+            'message': 'This is a test collaboration request.'
+        }
+        response = self.client.post(reverse('about'), form_data)
+        self.assertEqual(response.status_code, 200)
+        # Verify that the collaboration request was created in the database.
+        self.assertTrue(CollaborateRequest.objects.filter(
+            email=form_data['email'], message=form_data['message']).exists())
+
+    """ self.assertIn( b'Collaboration request received! I endeavour to respond within 2 working days.', response.context) """

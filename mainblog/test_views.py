@@ -37,3 +37,17 @@ class TestBlogViews(TestCase):
         self.assertIsInstance(
             # checks that the correct form is being used in the context.
             response.context['comment_form'], CommentForm)
+
+    def test_successful_comment_submission(self):
+        """Test that a comment can be successfully submitted via POST request."""
+        self.client.login(username="myUsername", password="myPassword")
+        post_data = {
+            'body': 'This is a test comment.'
+        }
+        response = self.client.post(reverse(
+            'post_detail', args=['blog-title']), data=post_data)
+        # After submitting the comment, the user should be redirected back to the post detail page.
+        self.assertEqual(response.status_code, 200)
+        # Verify that the comment was created in the database.
+        self.assertTrue(self.post.comments.filter(
+            body=post_data['body']).exists())
