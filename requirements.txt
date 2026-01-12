@@ -11,11 +11,11 @@ defusedxml==0.7.1
 dj-database-url==3.0.1
 dj3-cloudinary-storage==0.0.6
 Django==4.2.27
-django-allauth==0.57.2
+django-allauth==65.13.0
 django-bootstrap-v5==1.0.11
 django-crispy-forms==2.5
 django-summernote==0.8.20.0
-gunicorn==20.1.0
+gunicorn==22.0.0
 idna==3.11
 oauthlib==3.3.1
 psycopg2==2.9.11
@@ -30,5 +30,5 @@ soupsieve==2.8.1
 sqlparse==0.5.4
 typing_extensions==4.15.0
 tzdata==2025.3
-urllib3==1.26.20
+urllib3==2.6.3
 whitenoise==5.3.0
